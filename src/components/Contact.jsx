@@ -24,22 +24,22 @@ const Contact = () => {
     {
       icon: FaEnvelope,
       label: 'Email',
-      value: 'rudra.suthar@example.com',
-      link: 'mailto:rudra.suthar@example.com',
+      value: 'suhaniach25@gmail.com',
+      link: 'mailto:suhaniach25@gmail.com',
       color: 'text-neon-blue',
     },
     {
       icon: FaGithub,
       label: 'GitHub',
-      value: 'github.com/RudraSuthar09',
-      link: 'https://github.com/RudraSuthar09',
+      value: 'github.com/Suhanii054',
+      link: 'https://github.com/Suhanii054',
       color: 'text-neon-purple',
     },
     {
       icon: FaLinkedin,
       label: 'LinkedIn',
-      value: 'linkedin.com/in/rudrasuthar',
-      link: 'https://linkedin.com/in/rudrasuthar',
+      value: 'https://www.linkedin.com/in/suhani-acharya-0678342a9/',
+      link: 'https://www.linkedin.com/in/suhani-acharya-0678342a9/',
       color: 'text-neon-pink',
     },
     {
@@ -190,10 +190,10 @@ const Contact = () => {
               <h3 className="text-xl font-bold mb-4 text-white">Follow Me</h3>
               <div className="flex gap-4">
                 {[
-                  { icon: FaGithub, link: 'https://github.com/RudraSuthar09', color: 'hover:text-neon-blue' },
-                  { icon: FaLinkedin, link: '#', color: 'hover:text-neon-purple' },
+                  { icon: FaGithub, link: 'https://github.com/Suhanii054', color: 'hover:text-neon-blue' },
+                  { icon: FaLinkedin, link: 'https://www.linkedin.com/in/suhani-acharya-0678342a9/', color: 'hover:text-neon-purple' },
                   { icon: FaTwitter, link: '#', color: 'hover:text-neon-pink' },
-                  { icon: FaEnvelope, link: 'mailto:rudra.suthar@example.com', color: 'hover:text-neon-green' },
+                  { icon: FaEnvelope, link: 'mailto:suhaniach25@gmail.com', color: 'hover:text-neon-green' },
                 ].map((social, index) => (
                   <motion.a
                     key={index}
