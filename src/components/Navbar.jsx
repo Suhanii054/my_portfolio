@@ -29,7 +29,7 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             className="text-2xl font-bold bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent"
           >
-            &lt;RudraSuthar /&gt;
+            &lt;Suhani_Acharya /&gt;
           </motion.div>
 
           {/* Menu Items */}

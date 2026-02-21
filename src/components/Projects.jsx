@@ -7,7 +7,8 @@ const Projects = () => {
   const projects = [
     {
       title: 'E-Commerce Full Stack Platform',
-      description: 'A complete e-commerce solution with payment integration, user authentication, and admin dashboard. Built with MERN stack.',
+      description:
+        'Production-ready MERN e-commerce platform with secure authentication, payment integration, and admin analytics dashboard.',
       tags: ['React', 'Node.js', 'MongoDB', 'Express'],
       icons: [FaReact, FaServer, SiMongodb],
       gradient: 'from-neon-blue to-cyan-500',
@@ -15,8 +16,9 @@ const Projects = () => {
       demo: '#',
     },
     {
-      title: 'oTree Experimental Platform',
-      description: 'Behavioral economics experiments platform developed during IIM Bangalore internship using Django and oTree framework.',
+      title: 'oTree Experimental Platform (IIM Bangalore)',
+      description:
+        'Behavioral economics experiment framework built using Django and oTree with structured participant logging, treatment randomization, and PostgreSQL-backed data pipelines.',
       tags: ['Django', 'Python', 'PostgreSQL', 'oTree'],
       icons: [SiDjango, FaPython, SiPostgresql],
       gradient: 'from-neon-purple to-purple-500',
@@ -24,43 +26,46 @@ const Projects = () => {
       demo: '#',
     },
     {
-      title: 'Image Classification CNN',
-      description: 'Deep learning model for multi-class image classification using Convolutional Neural Networks with 95% accuracy.',
-      tags: ['Python', 'TensorFlow', 'CNN', 'Deep Learning'],
-      icons: [FaPython, SiTensorflow, FaBrain],
+      title: 'EEG-Based Depression Detection (Published)',
+      description:
+        'Research-driven EEG classification system using the 128-channel MODMA dataset. Combined signal preprocessing with ML benchmarking and a 1D CNN–BiLSTM hybrid, achieving 96.2% accuracy and 0.95 balanced F1-score (ComSIA 2026, Springer LNNS).',
+      tags: ['Python', 'Signal Processing', 'XGBoost', 'CNN-BiLSTM'],
+      icons: [FaPython, FaBrain],
       gradient: 'from-neon-pink to-pink-500',
       github: '#',
       demo: '#',
     },
     {
-      title: 'Real-time Chat Application',
-      description: 'WebSocket-based real-time chat app with rooms, authentication, and message history. Features include typing indicators and online status.',
-      tags: ['React', 'Socket.io', 'Node.js', 'MongoDB'],
-      icons: [FaReact, FaServer, SiMongodb],
-      gradient: 'from-neon-green to-green-500',
-      github: '#',
-      demo: '#',
-    },
-    {
-      title: 'Sentiment Analysis API',
-      description: 'NLP-powered sentiment analysis tool using LSTM networks. Deployed as REST API with real-time text analysis capabilities.',
-      tags: ['Python', 'PyTorch', 'NLP', 'FastAPI'],
+      title: 'Fake Face Detection using Vision Transformers',
+      description:
+        'Deepfake detection pipeline leveraging pretrained Vision Transformers and parameter-efficient fine-tuning (LoRA). Achieved 91.5% test accuracy with structured model comparison and visual explainability analysis.',
+      tags: ['PyTorch', 'ViT', 'CLIP', 'LoRA'],
       icons: [FaPython, FaBrain],
       gradient: 'from-yellow-400 to-orange-500',
       github: '#',
       demo: '#',
     },
     {
-      title: 'Task Management System',
-      description: 'Collaborative project management tool with Kanban boards, team collaboration, and progress tracking features.',
-      tags: ['React', 'Django', 'PostgreSQL', 'Redis'],
-      icons: [FaReact, SiDjango, SiPostgresql],
+      title: 'Smart Traffic Signal Control (Computer Vision)',
+      description:
+        'AI-powered adaptive traffic control system using YOLOv8 for real-time vehicle detection and density-based signal optimization. Designed modular state-machine logic for multi-intersection scalability.',
+      tags: ['Python', 'OpenCV', 'YOLOv8', 'Computer Vision'],
+      icons: [FaPython, FaBrain],
+      gradient: 'from-neon-green to-green-500',
+      github: '#',
+      demo: '#',
+    },
+    {
+      title: 'Real-Time Chat Application',
+      description:
+        'WebSocket-driven chat system with authentication, room-based messaging, typing indicators, and persistent message storage.',
+      tags: ['React', 'Socket.io', 'Node.js', 'MongoDB'],
+      icons: [FaReact, FaServer, SiMongodb],
       gradient: 'from-indigo-400 to-purple-600',
       github: '#',
       demo: '#',
     },
   ]
-
   return (
     <section id="projects" className="py-20 px-4">
       <div className="max-w-7xl mx-auto">
@@ -93,7 +98,7 @@ const Projects = () => {
             >
               {/* Project Header with Gradient */}
               <div className={`h-2 bg-gradient-to-r ${project.gradient}`}></div>
-              
+
               <div className="p-6">
                 {/* Icons */}
                 <div className="flex gap-3 mb-4">

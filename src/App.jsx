@@ -49,7 +49,7 @@ function App() {
       {/* Footer */}
       <footer className="py-8 text-center border-t border-gray-800">
         <p className="text-gray-500">
-          © 2026 Rudra Suthar. Built with React & Tailwind CSS
+          © 2026 Suhani Acharya. Built with React & Tailwind CSS
         </p>
       </footer>
     </div>
