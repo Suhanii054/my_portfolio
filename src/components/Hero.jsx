@@ -1,12 +1,13 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { FaGithub, FaLinkedin, FaEnvelope, FaCode, FaBrain } from 'react-icons/fa'
+import my_picture from "../assets/my_image.jpeg";
 
 const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center pt-16 px-4">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        
+
         {/* Left Side - Text */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -75,8 +76,8 @@ const Hero = () => {
             transition={{ delay: 0.6 }}
           >
             Currently interning at{' '}
-            <span className="text-neon-blue font-semibold">IIM Bangalore</span>, 
-            working on oTree and Django projects. Passionate about building full-stack 
+            <span className="text-neon-blue font-semibold">IIM Bangalore</span>,
+            working on oTree and Django projects. Passionate about building full-stack
             applications and exploring the frontiers of AI/ML.
           </motion.p>
 
@@ -133,7 +134,7 @@ const Hero = () => {
           className="relative hidden md:flex items-center justify-center"
         >
           <div className="relative w-96 h-96 lg:w-[450px] lg:h-[450px]">
-            
+
             {/* Rotating Rings */}
             <motion.div
               animate={{ rotate: 360 }}
@@ -164,9 +165,9 @@ const Hero = () => {
             >
               <div className="w-full h-full rounded-full overflow-hidden bg-gray-200 relative">
                 <img
-                  src="/photobang.jpeg"
+                  src={my_picture}
                   alt="Suhani Acharya"
-                  className="w-full h-full object-cover scale-80"
+                  className="w-full h-full object-cover scale-110"
                   style={{ objectPosition: 'center 70%' }}
                 />
               </div>
