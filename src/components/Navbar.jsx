@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { FaBars, FaXmark } from 'react-icons/fa6'
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,51 +13,97 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const menuItems = ['Home', 'About', 'Skills', 'Projects', 'Contact']
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [menuOpen])
+
+  const menuItems = ['Skills', 'Projects', 'Contact']
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-gray-950/90 backdrop-blur-md shadow-lg shadow-neon-blue/10' : 'bg-transparent'
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${
+        scrolled || menuOpen ? 'bg-ink/95 backdrop-blur-md border-edge' : 'bg-transparent border-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent"
+          <a
+            href="#home"
+            onClick={() => setMenuOpen(false)}
+            className="text-xl md:text-2xl font-display font-extrabold uppercase text-accent tracking-tighter"
           >
-            &lt;Suhani_Acharya /&gt;
-          </motion.div>
+            Suhani Acharya
+          </a>
 
           {/* Menu Items */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8 font-mono text-sm uppercase tracking-wider">
             {menuItems.map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="text-gray-300 hover:text-neon-blue transition-colors duration-300 relative group"
+                className="text-gray-400 hover:text-accent transition-colors duration-300 relative group"
               >
                 {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-neon-blue to-neon-purple group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent group-hover:w-full transition-all duration-300"></span>
               </a>
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button className="text-neon-blue">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
+          {/* Resume Button */}
+          <a
+            href="/Suhani_Acharya_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:inline-block px-6 py-2 rounded-sm bg-accent text-ink font-display text-sm font-extrabold uppercase tracking-wide hover:bg-white transition-colors duration-300"
+          >
+            Resume
+          </a>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            className="md:hidden text-accent border border-accent rounded-sm p-2.5"
+          >
+            {menuOpen ? <FaXmark className="text-lg" /> : <FaBars className="text-lg" />}
+          </button>
         </div>
       </div>
-    </motion.nav>
+
+      {/* Mobile Menu Panel */}
+      <div
+        className={`md:hidden overflow-hidden border-t border-edge bg-ink/95 backdrop-blur-md transition-[max-height,opacity] duration-300 ease-in-out ${
+          menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="px-4 sm:px-6 py-4 flex flex-col gap-1 font-mono text-sm uppercase tracking-wider">
+          {menuItems.map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              onClick={() => setMenuOpen(false)}
+              className="text-gray-300 hover:text-accent py-3 border-b border-edge/60"
+            >
+              {item}
+            </a>
+          ))}
+          <a
+            href="/Suhani_Acharya_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMenuOpen(false)}
+            className="mt-4 text-center px-6 py-3 rounded-sm bg-accent text-ink font-display font-extrabold uppercase tracking-wide"
+          >
+            Resume
+          </a>
+        </div>
+      </div>
+    </nav>
   )
 }
 

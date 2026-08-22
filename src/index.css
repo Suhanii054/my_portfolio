@@ -7,9 +7,13 @@
   * {
     @apply scroll-smooth;
   }
-  
+
   body {
-    @apply bg-gray-950 text-gray-100 overflow-x-hidden;
+    @apply bg-ink text-gray-100 overflow-x-hidden font-body;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
   }
 }
 
@@ -19,98 +23,63 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #131313;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #00f3ff, #b829fc);
-  border-radius: 10px;
+  background: #ffb0ca;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #b829fc, #ff2e97);
+  background: #ff8bb5;
 }
 
-/* Grid Background Effect */
+/* Soft ambient background glow */
 .grid-background {
-  background-image: 
-    linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
-  background-size: 50px 50px;
-  background-position: center center;
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(255, 176, 202, 0.07), transparent 45%),
+    radial-gradient(circle at 85% 90%, rgba(255, 176, 202, 0.05), transparent 45%);
 }
 
-/* Glowing borders */
-.glow-border {
+/* Sharp technical panel border, single accent edge on hover */
+.tech-panel {
   position: relative;
-  background: linear-gradient(145deg, rgba(0, 243, 255, 0.1), rgba(184, 41, 252, 0.1));
-  border: 1px solid transparent;
-  background-clip: padding-box;
+  background: #1c1b1b;
+  border: 1px solid #3a2c30;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
 }
 
-.glow-border::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(145deg, #00f3ff, #b829fc, #ff2e97);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0.5;
+.tech-panel:hover {
+  border-color: #ffb0ca66;
+}
+
+/* Glow text effect for hero headline, matches reference design */
+.text-glow {
+  text-shadow: 0 0 10px rgba(255, 176, 202, 0.5);
 }
 
 /* Cursor Light Effect */
 .cursor-light {
   position: fixed;
-  width: 600px;
-  height: 600px;
+  width: 500px;
+  height: 500px;
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 1;
   background: radial-gradient(
     circle,
-    rgba(0, 243, 255, 0.15) 0%,
-    rgba(184, 41, 252, 0.1) 25%,
-    rgba(255, 46, 151, 0.05) 50%,
-    transparent 70%
+    rgba(255, 176, 202, 0.08) 0%,
+    transparent 65%
   );
   transition: opacity 0.3s ease;
-  animation: pulse-glow 3s ease-in-out infinite;
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 0.5;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: translate(-50%, -50%) scale(1.1);
-  }
-}
-
-/* Animated gradient border rotation */
-@keyframes gradient-rotate {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 /* Additional glow effect on hover for interactive elements */
 a:hover, button:hover {
-  filter: drop-shadow(0 0 8px rgba(0, 243, 255, 0.5));
+  filter: drop-shadow(0 0 6px rgba(255, 176, 202, 0.35));
 }
 
 /* Smooth transitions for all interactive elements */
@@ -121,23 +90,13 @@ a, button, input, textarea {
 /* Enhanced focus states for accessibility */
 input:focus, textarea:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 243, 255, 0.3);
+  box-shadow: 0 0 0 2px rgba(255, 176, 202, 0.4);
 }
 
-/* Animated gradient text */
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
+/* Prevent iOS Safari from auto-zooming when a sub-16px input is focused.
+   !important needed to beat Tailwind's text-size utility classes. */
+@media (max-width: 640px) {
+  input, textarea {
+    font-size: 16px !important;
   }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient-shift 3s ease infinite;
 }

@@ -1,119 +1,133 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter, FaPaperPlane, FaMapMarkerAlt } from 'react-icons/fa'
+import { FaPaperPlane } from 'react-icons/fa'
+import emailjs from '@emailjs/browser'
+
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    subject: '',
     message: '',
   })
+  const [status, setStatus] = useState('idle') // idle | sending | success | error
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Add form submission logic here (EmailJS, etc.)
-    console.log('Form submitted:', formData)
-    alert('Message sent! (This is a demo)')
+
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      window.location.href = `mailto:suhaniach25@gmail.com?subject=${encodeURIComponent(
+        formData.subject || `Portfolio message from ${formData.name}`
+      )}&body=${encodeURIComponent(`${formData.message}\n\n— ${formData.name} (${formData.email})`)}`
+      return
+    }
+
+    setStatus('sending')
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject || `Portfolio message from ${formData.name}`,
+          message: formData.message,
+        },
+        PUBLIC_KEY
+      )
+      setStatus('success')
+      setFormData({ name: '', email: '', subject: '', message: '' })
+    } catch (err) {
+      console.error('EmailJS send failed:', err)
+      setStatus('error')
+    }
   }
 
-  const contactInfo = [
-    {
-      icon: FaEnvelope,
-      label: 'Email',
-      value: 'suhaniach25@gmail.com',
-      link: 'mailto:suhaniach25@gmail.com',
-      color: 'text-neon-blue',
-    },
-    {
-      icon: FaGithub,
-      label: 'GitHub',
-      value: 'github.com/Suhanii054',
-      link: 'https://github.com/Suhanii054',
-      color: 'text-neon-purple',
-    },
-    {
-      icon: FaLinkedin,
-      label: 'LinkedIn',
-      value: 'https://www.linkedin.com/in/suhani-acharya-0678342a9/',
-      link: 'https://www.linkedin.com/in/suhani-acharya-0678342a9/',
-      color: 'text-neon-pink',
-    },
-    {
-      icon: FaMapMarkerAlt,
-      label: 'Location',
-      value: 'Bangalore, India',
-      link: null,
-      color: 'text-neon-green',
-    },
+  const fields = [
+    { id: 'name', label: '01 // IDENTIFIER', type: 'text', placeholder: 'Your name' },
+    { id: 'email', label: '02 // NETWORK ADDRESS', type: 'email', placeholder: 'you@example.com' },
+  ]
+
+  const network = [
+    { label: 'LinkedIn Profile', href: 'https://www.linkedin.com/in/suhani-acharya-0678342a9/' },
+    { label: 'GitHub Repositories', href: 'https://github.com/Suhanii054' },
+    { label: 'LeetCode', href: 'https://leetcode.com/' },
   ]
 
   return (
-    <section id="contact" className="py-20 px-4 bg-gray-900/30">
+    <section id="contact" className="py-24 px-4">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Get In <span className="bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">Touch</span>
+          <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
+            INITIATE <span className="text-accent">CONNECTION</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-neon-blue to-neon-purple mx-auto mb-4"></div>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Have a project in mind or want to collaborate? Feel free to reach out!
+          <p className="font-mono text-xs md:text-sm text-accent tracking-widest">
+            TRANSMIT YOUR COORDINATES. ESTABLISH DIRECT SECURE COMMUNICATION.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-3 gap-8">
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="md:col-span-2 tech-panel p-6 md:p-10"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                {fields.map((field) => (
+                  <div key={field.id}>
+                    <label htmlFor={field.id} className="block font-mono text-xs text-gray-500 tracking-widest mb-2">
+                      {field.label}
+                    </label>
+                    <input
+                      type={field.type}
+                      id={field.id}
+                      name={field.id}
+                      value={formData[field.id]}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 rounded-sm bg-ink border border-edge focus:border-accent focus:outline-none transition-all text-white font-mono text-sm"
+                      placeholder={field.placeholder}
+                    />
+                  </div>
+                ))}
+              </div>
+
               <div>
-                <label htmlFor="name" className="block text-gray-300 mb-2 font-medium">
-                  Your Name
+                <label htmlFor="subject" className="block font-mono text-xs text-gray-500 tracking-widest mb-2">
+                  03 // TRANSMISSION SUBJECT
                 </label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
                   onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-neon-blue focus:outline-none focus:ring-2 focus:ring-neon-blue/50 transition-all text-white"
-                  placeholder="John Doe"
+                  className="w-full px-4 py-3 rounded-sm bg-ink border border-edge focus:border-accent focus:outline-none transition-all text-white font-mono text-sm"
+                  placeholder="What is this about?"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-gray-300 mb-2 font-medium">
-                  Your Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-neon-purple focus:outline-none focus:ring-2 focus:ring-neon-purple/50 transition-all text-white"
-                  placeholder="john@example.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-gray-300 mb-2 font-medium">
-                  Your Message
+                <label htmlFor="message" className="block font-mono text-xs text-gray-500 tracking-widest mb-2">
+                  04 // PAYLOAD
                 </label>
                 <textarea
                   id="message"
@@ -122,103 +136,80 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows="5"
-                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:border-neon-pink focus:outline-none focus:ring-2 focus:ring-neon-pink/50 transition-all text-white resize-none"
-                  placeholder="Tell me about your project..."
+                  className="w-full px-4 py-3 rounded-sm bg-ink border border-edge focus:border-accent focus:outline-none transition-all text-white font-mono text-sm resize-none"
+                  placeholder="Enter your transmission data here..."
                 />
               </div>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                type="submit"
-                className="w-full px-8 py-3 bg-gradient-to-r from-neon-blue to-neon-purple rounded-lg font-semibold hover:shadow-lg hover:shadow-neon-blue/50 transition-all duration-300 flex items-center justify-center gap-2"
-              >
-                <FaPaperPlane />
-                Send Message
-              </motion.button>
+              <div className="flex items-center gap-4 flex-wrap">
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="inline-flex items-center gap-2 px-8 py-3 rounded-sm bg-accent text-ink font-display font-extrabold text-sm uppercase tracking-wide shadow-[0_0_15px_rgba(255,176,202,0.3)] hover:shadow-[0_0_25px_rgba(255,176,202,0.5)] hover:bg-white transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {status === 'sending' ? 'Transmitting...' : 'Transmit Data'}
+                  <FaPaperPlane className="text-xs" />
+                </motion.button>
+
+                {status === 'success' && (
+                  <span className="font-mono text-xs text-accent">
+                    ✓ TRANSMISSION RECEIVED. I'll get back to you soon.
+                  </span>
+                )}
+                {status === 'error' && (
+                  <span className="font-mono text-xs text-red-400">
+                    ✗ TRANSMISSION FAILED. Email me directly instead.
+                  </span>
+                )}
+              </div>
             </form>
           </motion.div>
 
           {/* Contact Information */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="space-y-6"
+            className="flex flex-col gap-6"
           >
-            <div className="glow-border rounded-xl p-8 bg-gray-900/50 backdrop-blur-sm">
-              <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">
-                Contact Information
-              </h3>
-              
-              <div className="space-y-6">
-                {contactInfo.map((info, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-start gap-4"
-                  >
-                    <div className={`${info.color} text-2xl mt-1`}>
-                      <info.icon />
-                    </div>
-                    <div>
-                      <p className="text-gray-400 text-sm mb-1">{info.label}</p>
-                      {info.link ? (
-                        <a
-                          href={info.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-white hover:text-neon-blue transition-colors"
-                        >
-                          {info.value}
-                        </a>
-                      ) : (
-                        <p className="text-white">{info.value}</p>
-                      )}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+            <div className="tech-panel p-6">
+              <p className="font-mono text-xs text-gray-500 tracking-widest mb-2">DIRECT LINE</p>
+              <a
+                href="mailto:suhaniach25@gmail.com"
+                className="text-white hover:text-accent transition-colors break-all"
+              >
+                suhaniach25@gmail.com
+              </a>
             </div>
 
-            {/* Social Links Card */}
-            <div className="glow-border rounded-xl p-8 bg-gray-900/50 backdrop-blur-sm">
-              <h3 className="text-xl font-bold mb-4 text-white">Follow Me</h3>
-              <div className="flex gap-4">
-                {[
-                  { icon: FaGithub, link: 'https://github.com/Suhanii054', color: 'hover:text-neon-blue' },
-                  { icon: FaLinkedin, link: 'https://www.linkedin.com/in/suhani-acharya-0678342a9/', color: 'hover:text-neon-purple' },
-                  { icon: FaTwitter, link: '#', color: 'hover:text-neon-pink' },
-                  { icon: FaEnvelope, link: 'mailto:suhaniach25@gmail.com', color: 'hover:text-neon-green' },
-                ].map((social, index) => (
-                  <motion.a
-                    key={index}
-                    href={social.link}
+            <div className="tech-panel p-6">
+              <p className="font-mono text-xs text-gray-500 tracking-widest mb-4">GLOBAL NETWORK</p>
+              <div className="space-y-3">
+                {network.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    className={`text-3xl text-gray-400 ${social.color} transition-colors duration-300`}
+                    className="block text-accent hover:text-white transition-colors text-sm"
                   >
-                    <social.icon />
-                  </motion.a>
+                    {item.label}
+                  </a>
                 ))}
               </div>
             </div>
 
-            {/* Availability Card */}
-            <div className="glow-border rounded-xl p-8 bg-gradient-to-br from-neon-blue/10 to-neon-purple/10 backdrop-blur-sm">
-              <h3 className="text-xl font-bold mb-2 text-white">Open to Opportunities</h3>
-              <p className="text-gray-300">
-                Currently seeking full-time software development roles and exciting freelance projects!
-              </p>
-              <div className="mt-4 flex items-center gap-2">
-                <div className="w-3 h-3 bg-neon-green rounded-full animate-pulse"></div>
-                <span className="text-neon-green text-sm font-semibold">Available for work</span>
+            <div className="tech-panel p-6">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
+                <span className="text-white text-sm font-mono uppercase tracking-wide">Open to opportunities</span>
               </div>
+              <p className="text-gray-500 text-xs mt-2 leading-relaxed">
+                Seeking full-time software / ML roles and internships.
+              </p>
             </div>
           </motion.div>
         </div>

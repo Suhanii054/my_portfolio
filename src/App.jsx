@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import About from './components/About'
 import Skills from './components/Skills'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
@@ -32,24 +31,19 @@ function App() {
         }}
       />
 
-      {/* Animated Background */}
+      {/* Dot Grid Background */}
       <div className="fixed inset-0 grid-background -z-10"></div>
-      
-      {/* Gradient Orbs */}
-      <div className="fixed top-0 left-0 w-96 h-96 bg-neon-blue/20 rounded-full blur-3xl -z-10 animate-pulse-slow"></div>
-      <div className="fixed bottom-0 right-0 w-96 h-96 bg-neon-purple/20 rounded-full blur-3xl -z-10 animate-pulse-slow"></div>
-      
+
       <Navbar />
       <Hero />
-      <About />
       <Skills />
       <Projects />
       <Contact />
-      
+
       {/* Footer */}
-      <footer className="py-8 text-center border-t border-gray-800">
-        <p className="text-gray-500">
-          © 2026 Suhani Acharya. Built with React & Tailwind CSS
+      <footer className="py-8 px-4 text-center border-t border-edge">
+        <p className="text-gray-500 text-sm font-mono">
+          © 2026 SUHANI ACHARYA. ENGINEERED WITH PRECISION.
         </p>
       </footer>
     </div>
