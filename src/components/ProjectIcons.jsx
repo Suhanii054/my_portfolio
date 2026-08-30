@@ -60,6 +60,79 @@ export const CartIcon = ({ className }) => (
   </svg>
 )
 
+// Power grid + energy bolt, for the Adani energy forecasting dashboard
+export const GridIcon = ({ className }) => (
+  <svg viewBox="0 0 160 80" className={className} {...shared}>
+    {[36, 80, 124].map((x) => (
+      <line key={`v-${x}`} x1={x} y1="14" x2={x} y2="66" strokeOpacity="0.25" />
+    ))}
+    {[22, 40, 58].map((y) => (
+      <line key={`h-${y}`} x1="24" y1={y} x2="136" y2={y} strokeOpacity="0.25" />
+    ))}
+    <polyline points="70,14 58,42 82,42 68,66" strokeWidth="2" />
+    {[
+      [36, 22],
+      [124, 40],
+      [80, 58],
+    ].map(([cx, cy]) => (
+      <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="2.4" fill="currentColor" stroke="none" />
+    ))}
+  </svg>
+)
+
+// Map heatmap + location pin, for the Flipkart traffic-violation project
+export const TrafficIcon = ({ className }) => (
+  <svg viewBox="0 0 160 80" className={className} {...shared}>
+    <rect x="24" y="14" width="112" height="52" rx="4" strokeOpacity="0.3" />
+    <path d="M24 40 H136 M52 14 V66 M96 14 V66" strokeOpacity="0.2" />
+    <circle cx="72" cy="34" r="14" strokeOpacity="0.35" />
+    <circle cx="72" cy="34" r="7" strokeOpacity="0.6" />
+    <path d="M112 30 a7 7 0 1 0 -14 0 c0 6 7 14 7 14 s7 -8 7 -14 z" />
+    <circle cx="105" cy="30" r="2.4" fill="currentColor" stroke="none" />
+  </svg>
+)
+
+// Cloud + linked service nodes, for the multi-cloud quiz platform
+export const CloudIcon = ({ className }) => (
+  <svg viewBox="0 0 160 80" className={className} {...shared}>
+    <path d="M56 40 a14 14 0 0 1 27 -5 a10 10 0 0 1 13 12 h-38 a11 11 0 0 1 -2 -7 z" transform="translate(0 -8)" />
+    <line x1="60" y1="40" x2="48" y2="56" strokeOpacity="0.5" />
+    <line x1="80" y1="42" x2="80" y2="56" strokeOpacity="0.5" />
+    <line x1="100" y1="40" x2="112" y2="56" strokeOpacity="0.5" />
+    {[
+      [48, 60],
+      [80, 60],
+      [112, 60],
+    ].map(([cx, cy]) => (
+      <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="4" fill="currentColor" stroke="none" />
+    ))}
+  </svg>
+)
+
+// Knowledge graph — linked nodes around a hub, for the Cortex GraphRAG platform
+export const GraphIcon = ({ className }) => (
+  <svg viewBox="0 0 160 80" className={className} {...shared}>
+    <g strokeOpacity="0.5">
+      <line x1="80" y1="40" x2="44" y2="18" />
+      <line x1="80" y1="40" x2="122" y2="20" />
+      <line x1="80" y1="40" x2="34" y2="60" />
+      <line x1="80" y1="40" x2="118" y2="60" />
+      <line x1="44" y1="18" x2="122" y2="20" />
+      <line x1="34" y1="60" x2="118" y2="60" />
+    </g>
+    {[
+      [44, 18],
+      [122, 20],
+      [34, 60],
+      [118, 60],
+    ].map(([cx, cy]) => (
+      <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="3" fill="currentColor" stroke="none" />
+    ))}
+    <circle cx="80" cy="40" r="6" />
+    <circle cx="80" cy="40" r="2.5" fill="currentColor" stroke="none" />
+  </svg>
+)
+
 // EEG / signal waveform, for the published research paper
 export const WaveIcon = ({ className }) => (
   <svg viewBox="0 0 160 80" className={className} {...shared}>

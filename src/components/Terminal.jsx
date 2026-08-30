@@ -21,7 +21,7 @@ const buildOutput = (raw, { navigate }) => {
       ]
     case 'whoami':
       return [
-        'suhani_acharya — B.Tech Artificial Intelligence, NIT Surat (CGPA 7.62/10)',
+        'suhani_acharya — B.Tech Artificial Intelligence, NIT Surat',
         'Full-stack engineer + applied ML. Currently building agentic AI systems',
         'and production web platforms. Based in Surat, India.',
       ]
@@ -38,16 +38,20 @@ const buildOutput = (raw, { navigate }) => {
       ]
     case 'education':
       return [
-        'NIT Surat — B.Tech Artificial Intelligence (2023–2027), CGPA 7.62/10',
+        'NIT Surat — B.Tech Artificial Intelligence (2023–2027)',
         'Kendriya Vidyalaya, Vadodara — Class 12, 90.4%',
         'Gujarat Public School, Vadodara — Class 10, 95.6%',
       ]
     case 'projects':
       return [
-        'FutureLens            — Agentic AI forecasting platform (Prophet + LightGBM + Gemini)',
-        'Fake Face Detection    — ViT deepfake classifier, 91.5% accuracy, LoRA fine-tuned',
-        'Kashvi Creations       — Full-stack MERN e-commerce platform',
-        'EEG Depression Detect. — Published research, ComSIA 2026 (Springer LNNS), 96.2% acc.',
+        'FutureLens             — Agentic AI forecasting platform (Prophet + LightGBM + Gemini)',
+        'Adani AI Energy Fcast.  — Multi-agent energy dashboard, 2nd Runner-Up @ Adani AI Hackathon',
+        'Flipkart Gridlock       — Bengaluru traffic-violation prediction (LightGBM Poisson + Tweedie)',
+        'Cortex                  — Industrial hybrid-GraphRAG platform (Neo4j + safety veto + FastAPI)',
+        'Fake Face Detection     — ViT deepfake classifier, 91.5% accuracy, LoRA fine-tuned',
+        'EEG Depression Detect.  — Published research, ComSIA 2026 (Springer LNNS), 96.2% acc.',
+        'Kashvi Creations        — Full-stack MERN e-commerce platform (live)',
+        'Cloud-Based AI Quiz     — Serverless multi-cloud quiz (AWS + Firebase + Gemini)',
         "→ scroll to 'Curated Projects' for details, or run 'contact' for GitHub.",
       ]
     case 'achievements':

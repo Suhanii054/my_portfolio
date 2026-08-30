@@ -55,13 +55,14 @@ const Skills = () => {
           >
             <p className="font-mono text-xs text-gray-500 tracking-widest mb-4">01_PROFILE.md</p>
             <p className="text-gray-300 leading-relaxed mb-4">
-              B.Tech Artificial Intelligence candidate at NIT Surat (CGPA 7.62/10.0),
-              building production-grade full-stack platforms and applied ML systems —
+              B.Tech Artificial Intelligence candidate at NIT Surat, building
+              production-grade full-stack platforms and applied ML systems —
               from agentic forecasting pipelines to vision-transformer deepfake detection.
             </p>
             <p className="text-gray-400 leading-relaxed mb-6">
-              Recognized by Amazon ML Summer School, a published research paper
-              (Springer LNNS), and multiple hackathon wins. I care about systems that
+              Selected for <span className="text-accent font-semibold">Amazon ML Summer
+              School 2026</span> from 130,000+ applicants — alongside a published research
+              paper (Springer LNNS) and multiple hackathon wins. I care about systems that
               are technically rigorous and genuinely useful.
             </p>
             <div className="flex-1 flex gap-6 min-h-[220px]">
